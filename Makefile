@@ -1,4 +1,10 @@
-build:
+install:
+	poetry install
+
+test:
+	poetry run pytest
+
+build: check
 	poetry build
 
 publish:
@@ -9,3 +15,13 @@ package-install:
 
 lint:
 	poetry run flake8 gendiff
+
+selfcheck:
+	poetry check
+
+check: selfcheck test lint
+
+test-coverage:
+	poetry run pytest --cov=gendiff --cov-report xml
+
+.PHONY: install test lint selfcheck check build

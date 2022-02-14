@@ -4,18 +4,27 @@ import json
 
 
 def generate_diff(file1, file2):
-    source1 = json.load(open(file1))
-    source2 = json.load(open(file2))
-    result = '{' + '\n'
-    for i in source1.keys() & source2.keys():
-        if source1[i] == source2[i]:
-            result = result + '   ' + i + ': ' + str(source1[i]) + '\n'
+    s1 = json.load(open(file1))
+    s2 = json.load(open(file2))
+    com = s1.keys() & s2.keys()
+    before = s1.keys() - s2.keys()
+    after = s2.keys() - s1.keys()
+    common = sorted(com)
+    only_1 = sorted(before)
+    only_2 = sorted(after)
+    result = ['{', ]
+    for i in common:
+        if s1[i] == s2[i]:
+            result.append('   ' + i + ': ' + str.lower(str(s1[i])))
         else:
-            result = result + ' - ' + i + ': ' + str(source1[i]) + '\n'
-            result = result + ' + ' + i + ': ' + str(source2[i]) + '\n'
-    for i in source1.keys() - source2.keys():
-        result = result + ' - ' + i + ': ' + str(source1[i]) + '\n'
-    for i in source2.keys() - source1.keys():
-        result = result + ' + ' + i + ': ' + str(source2[i]) + '\n'
-    result = result + '}'
-    return result
+            result.append(' - ' + i + ': ' + str.lower(str(s1[i])))
+            result.append(' + ' + i + ': ' + str.lower(str(s2[i])))
+    for i in only_1:
+        result.append(' - ' + i + ': ' + str.lower(str(s1[i])))
+    for i in only_2:
+        result.append(' + ' + i + ': ' + str.lower(str(s2[i])))
+    result.append('}')
+    answer = ''
+    for i in result:
+        answer = answer + i + '\n'
+    return answer

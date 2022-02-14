@@ -6,11 +6,20 @@ authors = ["Андрей Трушин <trand1@mail.ru>"]
 packages = [
   { include = "gendiff" },
 ]
+repository = "https://github.com/Aannddyy18/python-project-lvl1"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.2.3"
+pytest-cov = "^2.11.1"
+flake8 = "^4.0.1"
+PyYAML = ">= 3.10, < 6"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
