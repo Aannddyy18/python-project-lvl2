@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-from gendiff.generate_diff import generate_diff
+from gendiff.parse_data import parse_data
+from gendiff.parse_data import format_output
 
 
 def main():
@@ -12,7 +13,7 @@ def main():
 
     args = parser.parse_args()
 
-    diff = generate_diff(args.first, args.second)
+    diff = format_output(parse_data(args.first, args.second))
     print(diff)
 
 
