@@ -1,4 +1,4 @@
-"""Convert dictionary to string""" 
+"""Convert dictionary to string"""
 
 def stylish(values, replacer=' ', spaces_count=2, lvl=1, flag=''):
     if isinstance(values, dict):
@@ -10,14 +10,8 @@ def stylish(values, replacer=' ', spaces_count=2, lvl=1, flag=''):
             else:
                 key_string = '  ' + ''.join(key)
             result += f'{replacer * spaces_count * lvl}{key_string}: '
-            if key_string.startswith(('+', '-')):
-                result += stylish(value, replacer, spaces_count, lvl + 2, flag='new') + '\n'
-            else:
-                result += stylish(value, replacer, spaces_count, lvl + 2) + '\n'
-        if flag == 'new':
-            result += replacer * spaces_count * (lvl - 1) + '}'
-        else:
-            result += replacer * spaces_count * (lvl - 1) + '}'
+            result += stylish(value, replacer, spaces_count, lvl + 2) + '\n'
+        result += replacer * spaces_count * (lvl - 1) + '}'
     else:
         result = str(values)
     return result
