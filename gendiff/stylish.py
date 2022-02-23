@@ -1,7 +1,7 @@
 """Convert dictionary to string"""
 import json
 
-def stylish(values, replacer=' ', spaces_count=2, lvl=1, flag=''):
+def stylish(values, replacer=' ', spaces_count=2, lvl=1):
     if isinstance(values, dict):
         result = '{\n'
         key_string = ''
