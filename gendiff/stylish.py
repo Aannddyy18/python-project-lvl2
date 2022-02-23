@@ -1,4 +1,5 @@
 """Convert dictionary to string"""
+import json
 
 def stylish(values, replacer=' ', spaces_count=2, lvl=1, flag=''):
     if isinstance(values, dict):
@@ -13,5 +14,5 @@ def stylish(values, replacer=' ', spaces_count=2, lvl=1, flag=''):
             result += stylish(value, replacer, spaces_count, lvl + 2) + '\n'
         result += replacer * spaces_count * (lvl - 1) + '}'
     else:
-        result = str(values)
+        result = values if isinstance(values, str) else json.dumps(values)
     return result
