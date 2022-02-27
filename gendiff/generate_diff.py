@@ -3,9 +3,11 @@ import yaml
 import json
 from collections import OrderedDict
 from operator import itemgetter
+from formatters.stylish import stylish
+from formatters.plain import simplify
 
 
-def generate_diff(file1, file2):
+def generate_diff(file1, file2, format_name):
     if file1.endswith('.yml') or file1.endswith('.yaml'):
         f1 = yaml.safe_load(open(file1))
     else:
@@ -38,4 +40,7 @@ def generate_diff(file1, file2):
         for key in result_keys:
             output_dict[key] = result[key]
         return output_dict
-    return gen_diff_dict(f1, f2)
+    if format_name == 'stylish':
+        return stylish(gen_diff_dict(f1, f2))
+    if format_name == 'plain':
+        return simplify(gen_diff_dict(f1, f2))

@@ -1,5 +1,6 @@
 .venv/
 __pycache__/
 dist/
+.idea/
 conftest.py
 .coverage
