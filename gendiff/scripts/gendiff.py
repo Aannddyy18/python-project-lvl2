@@ -7,7 +7,8 @@ from gendiff.generate_diff import generate_diff
 def main():
     parser = argparse.ArgumentParser(description='Generate diff')
     parser.add_argument(
-        '-f', '--format', default='stylish', choices=['stylish', 'plain'],
+        '-f', '--format', default='stylish',
+        choices=['stylish', 'plain', 'json'],
         help='set format of output'
     )
     parser.add_argument('first', metavar='first_file', type=str)

@@ -5,6 +5,7 @@ from collections import OrderedDict
 from operator import itemgetter
 from formatters.stylish import stylish
 from formatters.plain import simplify
+from formatters.json_f import jsonf
 
 
 def generate_diff(file1, file2, format_name):
@@ -44,3 +45,5 @@ def generate_diff(file1, file2, format_name):
         return stylish(gen_diff_dict(f1, f2))
     if format_name == 'plain':
         return simplify(gen_diff_dict(f1, f2))
+    if format_name == 'json':
+        return jsonf(gen_diff_dict(f1, f2))

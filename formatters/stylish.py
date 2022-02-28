@@ -5,7 +5,6 @@ import json
 def stylish(values, replacer=' ', spaces_count=2, lvl=1):
     if isinstance(values, dict):
         result = '{\n'
-        key_string = ''
         for key, value in values.items():
             if key[0] == '+ ' or key[0] == '- ' or key[0] == '  ':
                 key_string = ''.join(key)
