@@ -7,7 +7,8 @@ from operator import itemgetter
 from formatters.stylish import stylish
 from formatters.plain import simplify
 from formatters.json_f import jsonf
-from gendiff import cli
+from .. import cli
+
 
 
 def generate_diff(file1, file2, format_name='stylish'):
