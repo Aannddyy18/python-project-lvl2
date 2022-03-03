@@ -1,1 +1,1 @@
-__all__ = ["cli"]
+from gendiff.parse_data import generate_diff

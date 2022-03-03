@@ -1,59 +1,26 @@
 #!/usr/bin/env python3
 """Parser and generator of difference between pair of json or yaml files"""
-import yaml
-import json
-from collections import OrderedDict
-from operator import itemgetter
-from formatters.stylish import stylish
-from formatters.plain import simplify
-from formatters.json_f import jsonf
-from .. import cli
+import argparse
+from gendiff.parse_data import generate_diff
 
 
+def cli():
+    parser = argparse.ArgumentParser(description='Generate diff')
+    parser.add_argument(
+        '-f', '--format', default='stylish',
+        choices=['stylish', 'plain', 'json'],
+        help='set format of output'
+    )
+    parser.add_argument('first', metavar='first_file', type=str)
+    parser.add_argument('second', metavar='second_file', type=str)
 
-def generate_diff(file1, file2, format_name='stylish'):
-    if file1.endswith('.yml') or file1.endswith('.yaml'):
-        f1 = yaml.safe_load(open(file1))
-    else:
-        f1 = json.load(open(file1))
-    if file2.endswith('.yml') or file2.endswith('.yaml'):
-        f2 = yaml.safe_load(open(file2))
-    else:
-        f2 = json.load(open(file2))
-
-    def gen_diff_dict(f1, f2):
-        common = f1.keys() & f2.keys()
-        before = f1.keys() - f2.keys()
-        after = f2.keys() - f1.keys()
-        result = {}
-        for i in common:
-            if isinstance(f1[i], dict) and isinstance(f2[i], dict):
-                result[('  ', i)] = gen_diff_dict(f1[i], f2[i])
-            else:
-                if f1[i] == f2[i]:
-                    result[('  ', i)] = f1[i]
-                else:
-                    result[('- ', i)] = f1[i]
-                    result[('+ ', i)] = f2[i]
-        for i in before:
-            result[('- ', i)] = f1[i]
-        for i in after:
-            result[('+ ', i)] = f2[i]
-        result_keys = sorted(result.keys(), key=itemgetter(1))
-        output_dict = OrderedDict.fromkeys(result_keys)
-        for key in result_keys:
-            output_dict[key] = result[key]
-        return output_dict
-    if format_name == 'stylish':
-        return stylish(gen_diff_dict(f1, f2))
-    if format_name == 'plain':
-        return simplify(gen_diff_dict(f1, f2))
-    if format_name == 'json':
-        return jsonf(gen_diff_dict(f1, f2))
+    args = parser.parse_args()
+    return args
 
 
 def main():
-    diff = generate_diff(cli.args.first, cli.args.second, cli.args.format)
+    args = cli()
+    diff = generate_diff(args.first, args.second, args.format)
     print(diff)
 
 

@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Calculating difference between two files"
 authors = ["Андрей Трушин <trand1@mail.ru>"]
 packages = [
   { include = "gendiff" },
 ]
-repository = "https://github.com/Aannddyy18/python-project-lvl1"
+repository = "https://github.com/Aannddyy18/python-project-lvl2"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent"
