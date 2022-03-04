@@ -23,7 +23,7 @@ def simplify(values):
                     result += walk_on_dict(node[key], path + '.' + key[1])
         return result
 
-    return walk_on_dict(values, '')
+    return (walk_on_dict(values, '')).strip('\n')
 
 def check_item(item):
     if isinstance(item, dict):
