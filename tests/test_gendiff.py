@@ -32,6 +32,7 @@ testdata = [
     (f1_yaml_nested, f2_yaml_nested, 'json', result_json)
 ]
 
+
 @pytest.mark.parametrize("a, b, f, expected", testdata)
 def test_gendiff(a, b, f, expected):
     assert generate_diff(a, b, f) == expected

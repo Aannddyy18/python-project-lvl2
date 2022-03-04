@@ -12,9 +12,9 @@ def simplify(values):
                     new_key = ('+ ', key[1])
                     prop_name = (path + '.' + key[1]).strip('.')
                     result += f'Property \'{prop_name}\' was updated. From {check_item(node[key])} ' \
-                                f'to {check_item(node[new_key])}\n'
+                              f'to {check_item(node[new_key])}\n'
                 elif key[0] == '- ' and ('+ ', key[1]) not in key_tuples:
-                    prop_name = (path + '.'+ key[1]).strip('.')
+                    prop_name = (path + '.' + key[1]).strip('.')
                     result += f'Property \'{prop_name}\' was removed\n'
                 elif key[0] == '+ ' and ('- ', key[1]) not in key_tuples:
                     prop_name = (path + '.' + key[1]).strip('.')
@@ -24,6 +24,7 @@ def simplify(values):
         return result
 
     return (walk_on_dict(values, '')).strip('\n')
+
 
 def check_item(item):
     if isinstance(item, dict):
