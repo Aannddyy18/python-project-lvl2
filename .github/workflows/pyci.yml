@@ -21,9 +21,11 @@ jobs:
       - name: Run linter and pytest
         run: |
           make check
-      - name: Test & publish code coverage
+      - name: publish code coverage to code-climate
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CODE_CLIMATE}}
         with:
+          coverageCommand: make test-coverage
           debug: true
+        if: ${{ github.event_name == 'push' }}
