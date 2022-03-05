@@ -24,8 +24,7 @@ jobs:
       - name: publish code coverage to code-climate
         uses: paambaati/codeclimate-action@v2.7.5
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CODE_CLIMATE}}
+          CC_TEST_REPORTER_ID: 6b7857bfb93c37fe0192c4b4fb69bb4ba9d846f7dccabc525889f70038d57b36
         with:
           coverageCommand: make test-coverage
           debug: true
-        if: ${{ github.event_name == 'push' }}
