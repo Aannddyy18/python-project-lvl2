@@ -9,7 +9,10 @@ from formatters.json_f import jsonf
 
 
 def generate_diff(file1, file2, format_name='stylish'):
-    f1, f2 = how_to_open(file1, file2)
+    f_1, format_1 = read_file(file1)
+    f_2, format_2 = read_file(file2)
+    f1 = parse_file(f_1, format_1)
+    f2 = parse_file(f_2, format_2)
 
     def gen_diff_dict(f1, f2):
         common = f1.keys() & f2.keys()
@@ -18,18 +21,16 @@ def generate_diff(file1, file2, format_name='stylish'):
         result = {}
         for i in common:
             if isinstance(f1[i], dict) and isinstance(f2[i], dict):
-                result[('  ', i)] = gen_diff_dict(f1[i], f2[i])
+                result[i] = gen_diff_dict(f1[i], f2[i])
+            elif f1[i] == f2[i]:
+                result[i] = ('same', f1[i])
             else:
-                if f1[i] == f2[i]:
-                    result[('  ', i)] = f1[i]
-                else:
-                    result[('- ', i)] = f1[i]
-                    result[('+ ', i)] = f2[i]
+                result[i] = ('changed', f1[i], f2[i])
         for i in before:
-            result[('- ', i)] = f1[i]
+            result[i] = ('deleted', f1[i])
         for i in after:
-            result[('+ ', i)] = f2[i]
-        result_keys = sorted(result.keys(), key=itemgetter(1))
+            result[i] = ('added', f2[i])
+        result_keys = sorted(result.keys())
         output_dict = OrderedDict.fromkeys(result_keys)
         for key in result_keys:
             output_dict[key] = result[key]
@@ -42,13 +43,17 @@ def generate_diff(file1, file2, format_name='stylish'):
         return jsonf(gen_diff_dict(f1, f2))
 
 
-def how_to_open(file1, file2):
-    if file1.endswith('.yml') or file1.endswith('.yaml'):
-        f1 = yaml.safe_load(open(file1))
-    else:
-        f1 = json.load(open(file1))
-    if file2.endswith('.yml') or file2.endswith('.yaml'):
-        f2 = yaml.safe_load(open(file2))
-    else:
-        f2 = json.load(open(file2))
-    return f1, f2
+def read_file(f):
+    if f.endswith('.yml') or f.endswith('.yaml'):
+        return f, 'yaml'
+    if f.endswith('.json'):
+        return f, 'json'
+
+
+def parse_file(file, format):
+    if format == 'yaml':
+        f = yaml.safe_load(open(file))
+        return f
+    if format == 'json':
+        f = json.load(open(file))
+        return f

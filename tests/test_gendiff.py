@@ -6,17 +6,15 @@ from gendiff.scripts.gendiff import generate_diff
 
 FIXTURES_FOLDER = 'fixtures'
 
-f = open(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_nested.txt'), 'r')
-result = f.read()
-f.close()
+def get_content(path_to_file):
+    with open(path_to_file, "r") as f:
+        return f.read()
 
-f_plain = open(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_plain.txt'), 'r')
-result_plain = f_plain.read()
-f_plain.close()
+result = get_content(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_nested.txt'))
 
-f_json = open(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_json.txt'), 'r')
-result_json = f_json.read()
-f_json.close()
+result_plain = get_content(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_plain.txt'))
+
+result_json = get_content(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_json.txt'))
 
 f1_json_nested = os.path.join(dirname(__file__), FIXTURES_FOLDER, 'file1_nested.json')
 f2_json_nested = os.path.join(dirname(__file__), FIXTURES_FOLDER, 'file2_nested.json')

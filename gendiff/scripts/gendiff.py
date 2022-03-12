@@ -4,7 +4,7 @@ import argparse
 from gendiff.parse_data import generate_diff
 
 
-def cli():
+def parse_command_line():
     parser = argparse.ArgumentParser(description='Generate diff')
     parser.add_argument(
         '-f', '--format', default='stylish',
@@ -19,7 +19,7 @@ def cli():
 
 
 def main():
-    args = cli()
+    args = parse_command_line()
     diff = generate_diff(args.first, args.second, args.format)
     print(diff)
 
