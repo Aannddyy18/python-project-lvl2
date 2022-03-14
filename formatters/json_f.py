@@ -23,7 +23,6 @@ def jsonf(values, replacer=' ', spaces_count=2, lvl=1):
             result = f'\"{values}\"' if isinstance(values, str) else json.dumps(values)
         return result
 
-
     if isinstance(values, dict):
         last = next(reversed(values))
         result = '{\n'

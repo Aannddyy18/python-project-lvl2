@@ -1,8 +1,6 @@
 """Parser and generator iof difference between pair of json or yaml files"""
 import yaml
 import json
-from collections import OrderedDict
-from operator import itemgetter
 from formatters.stylish import stylish
 from formatters.plain import simplify
 from formatters.json_f import jsonf

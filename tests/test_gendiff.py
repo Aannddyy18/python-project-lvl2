@@ -6,9 +6,11 @@ from gendiff.scripts.gendiff import generate_diff
 
 FIXTURES_FOLDER = 'fixtures'
 
+
 def get_content(path_to_file):
     with open(path_to_file, "r") as f:
         return f.read()
+
 
 result = get_content(os.path.join(dirname(__file__), FIXTURES_FOLDER, 'expected_nested.txt'))
 
