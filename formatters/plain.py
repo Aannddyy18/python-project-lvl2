@@ -20,7 +20,7 @@ def walk_on_dict(node, path):
             if value[0] == 'changed':
                 prop_name = (path + '.' + key).strip('.')
                 result += f'Property \'{prop_name}\' was updated. From {check_item(value[1][0])} ' \
-                            f'to {check_item(value[1][1])}\n'
+                          f'to {check_item(value[1][1])}\n'
             elif value[0] == 'deleted':
                 prop_name = (path + '.' + key).strip('.')
                 result += f'Property \'{prop_name}\' was removed\n'
