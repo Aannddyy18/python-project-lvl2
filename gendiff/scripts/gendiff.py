@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Parser and generator of difference between pair of json or yaml files"""
 import argparse
-from gendiff.parse_data import generate_diff
+from gendiff.gen_difference import generate_diff
 
 
-def parse_command_line():
+def parse_command_line_args():
     parser = argparse.ArgumentParser(description='Generate diff')
     parser.add_argument(
         '-f', '--format', default='stylish',
@@ -19,7 +19,7 @@ def parse_command_line():
 
 
 def main():
-    args = parse_command_line()
+    args = parse_command_line_args()
     diff = generate_diff(args.first, args.second, args.format)
     print(diff)
 

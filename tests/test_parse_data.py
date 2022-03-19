@@ -1,4 +1,4 @@
-from gendiff.parse_data import generate_diff
+from gendiff.gen_difference import generate_diff
 
 
 f = open('./tests/fixtures/result.txt', 'r')
