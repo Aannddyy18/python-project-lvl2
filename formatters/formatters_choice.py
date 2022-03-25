@@ -1,12 +1,13 @@
+from typing import Literal
 from formatters.stylish import stylish
-from formatters.plain import simplify
+from formatters.plain import stringify
 from formatters.json_f import jsonf
 
 
-def choose_format(dict, format_name):
+def choose_and_format(diff_dict, format_name: Literal['stylish', 'plain', 'json']) -> None:
     if format_name == 'stylish':
-        return stylish(dict)
+        return stylish(diff_dict)
     elif format_name == 'plain':
-        return simplify(dict)
+        return stringify(diff_dict)
     elif format_name == 'json':
-        return jsonf(dict)
+        return jsonf(diff_dict)

@@ -2,10 +2,10 @@ import yaml
 import json
 
 
-def parse_file(file, format):
-    if format == 'yaml':
-        f = yaml.safe_load(open(file))
+def parse_data(data, _format):
+    if _format == 'yaml':
+        f = yaml.safe_load(open(data))
         return f
-    if format == 'json':
-        f = json.load(open(file))
+    if _format == 'json':
+        f = json.load(open(data))
         return f
