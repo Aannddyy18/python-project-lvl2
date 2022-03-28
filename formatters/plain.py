@@ -16,15 +16,13 @@ def stringify_value(item):
 def walk_on_dict(node, path):
     result = ''
     for key, value in node.items():
+        prop_name = (path + '.' + key).strip('.')
         if value[0] == 'changed':
-            prop_name = (path + '.' + key).strip('.')
             result += f'Property \'{prop_name}\' was updated. From {stringify_value(value[1][0])} ' \
                       f'to {stringify_value(value[1][1])}\n'
         elif value[0] == 'deleted':
-            prop_name = (path + '.' + key).strip('.')
             result += f'Property \'{prop_name}\' was removed\n'
         elif value[0] == 'added':
-            prop_name = (path + '.' + key).strip('.')
             result += f'Property \'{prop_name}\' was added with value: {stringify_value(value[1])}\n'
         elif value[0] == 'nested':
             result += walk_on_dict(value[1], path + '.' + key)

@@ -1,5 +1,7 @@
-def identify_format(f):
-    if f.endswith('.yml') or f.endswith('.yaml'):
-        return f, 'yaml'
-    if f.endswith('.json'):
-        return f, 'json'
+def read_data(file_path):
+    if file_path.endswith('.yml') or file_path.endswith('.yaml'):
+        _data = open(file_path)
+        return _data, 'yaml'
+    if file_path.endswith('.json'):
+        _data = open(file_path)
+        return _data, 'json'
