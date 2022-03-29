@@ -7,5 +7,5 @@ def parse_data(_data, _format):
         f = yaml.safe_load(_data)
         return f
     if _format == 'json':
-        f = json.load(_data)
+        f = json.loads(_data)
         return f
